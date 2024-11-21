@@ -34,11 +34,11 @@ class NewDialog:
     def open(self):
         i18n = self.i18n
         with ui.dialog() as self.dialog, ui.card():
-            with ui.column().classes("align:'center"):
+            with ui.column():
                 ui.markdown(i18n.ensure)
-                with ui.row():
-                    yes = ui.button(i18n.del_yes)
-                    no = ui.button(i18n.del_no)
+                with ui.row().classes("w-full justify-center"):
+                    yes = ui.button(i18n.del_yes).props("no-caps")
+                    no = ui.button(i18n.del_no).props("no-caps")
                     yes.on_click(self.delete)
                     no.on_click(self.close)
         self.dialog.open()

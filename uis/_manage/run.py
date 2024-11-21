@@ -15,7 +15,9 @@ from uis.i18n import language_type
 class Button:
     def __init__(self, language: str) -> None:
         self.i18n = language_type(language).Manage.Run
-        self.button = ui.button(self.i18n.Button.run, icon="play_arrow")
+        self.button = ui.button(self.i18n.Button.run, icon="play_arrow").props(
+            "no-caps"
+        )
         self.button.on_click(NewDialog(language).open)
 
     def enable(self):
@@ -28,13 +30,22 @@ class Button:
 @singleton
 class NewDialog:
     def __init__(self, language: str) -> None:
+        i18n = language_type(language).Manage.Run.Button
         with ui.dialog().classes("w-full") as self.dialog, ui.card().style(
             "width: 500px; height: 550px; max-width: none"
         ):
 
             with ui.row():
-                self.update = ui.button("刷新", icon="update")
-                self.delete = ui.button("删除", icon="delete")
+                self.update = (
+                    ui.button(i18n.update, icon="update")
+                    .props("no-caps")
+                    .classes("w-25")
+                )
+                self.delete = (
+                    ui.button(i18n.delete, icon="delete")
+                    .props("no-caps")
+                    .classes("w-25")
+                )
                 RunButton(language)
                 StopButton(language).disable()
             ConfigTable(language)

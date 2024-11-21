@@ -15,7 +15,7 @@ class Select:
             language_dict, label=self.i18n.language, value=ui_language
         ).classes("w-40")
         self.language_select.on_value_change(self.select_on_change)
-        self.language_select.disable()  # Disable because i18 is still not completed.
+        # self.language_select.disable()  # Disable because i18 is still not completed.
 
     async def select_on_change(self):
         self.language_select.disable()

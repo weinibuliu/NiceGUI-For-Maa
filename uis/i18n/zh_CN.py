@@ -76,6 +76,7 @@ class Manage:
         class Win32:
             search = "搜索"
             save = "保存"
+            advance = "高级设置"
 
             class Notify:
                 saved = "保存成功"
@@ -144,6 +145,8 @@ class Manage:
     class Run:
         class Button:
             run = "运行"
+            update = "刷新"
+            delete = "删除"
             start = "开始"
             stop = "停止"
 
@@ -203,6 +206,7 @@ class Setting:
         notify = "UI 即将重启以完成更改。"
 
     class Notify:
+        notify = "运行时通知设置"
         toolkit = "Toolkit 初始化"
         resource = "资源加载"
         controller = "控制器连接"
@@ -215,7 +219,7 @@ class Setting:
 
     class Reload:
         reload = "重启 UI"
-        notify = "UI 即将重启。"
+        notify = "UI 即将重启……"
 
 
 @dataclass(frozen=-True)

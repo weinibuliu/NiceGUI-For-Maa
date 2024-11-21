@@ -15,8 +15,8 @@ tasker = ui_config["run_tasker"]
 class CheckBoxes:
     def __init__(self, language: str) -> None:
         self.i18n = i18n = language_type(language).Setting.Notify
-        with ui.card().style("width: 300px; height: 160px"):
-            ui.label("运行时通知设置")
+        with ui.card().style("width: 350px; height: 160px"):
+            ui.label(i18n.notify)
             with ui.row(align_items="start"):
                 self.toolkit_stat = ui.checkbox(i18n.toolkit, value=toolkit)
                 self.resorce_statu = ui.checkbox(i18n.resource, value=res)

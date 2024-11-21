@@ -325,7 +325,7 @@ class Win32:
                     .classes("justify-start; w-full")
                 )
         with ui.column():
-            advance_mode = ui.checkbox("Advance Mode")
+            advance_mode = ui.checkbox(self.i18n.advance)
             ui.label(
                 "Changeing the following options may cause some exceptions!"
             ).classes(replace="text-warning").bind_visibility_from(
