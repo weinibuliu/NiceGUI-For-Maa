@@ -13,7 +13,7 @@
 - 多语言支持: UI 本体全部文本均支持多语言。
 
 ## 文档
-**[快速开始](docs/zh-cn/Start/快速开始.md) | [常见问题](docs/zh-cn/Questions/常见问题.md) | [开发文档](docs/zh-cn/Bulid/开发文档.md)**
+**[快速开始](docs/zh-cn/0-1快速开始.md) | [常见问题](docs/zh-cn/1-1常见问题.mdd) | [开发文档](docs/zh-cn/2-1开发文档.md)**
 
 ## 支持
 **NFM** 将保持开源与免费。支持作者：\
