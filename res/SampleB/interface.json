@@ -1,0 +1,76 @@
+{
+    "author": "weinibuliu",
+    "url": "www.github.com",
+    "version": "0.0.1",
+    "message": "这是一个示例项目。它并不具备运行价值。",
+    "task": [
+        {
+            "name": "你好 世界",
+            "entry": "Sample",
+            "option": [
+                "OptionA",
+                "OptionB"
+            ]
+        },
+        {
+            "name": "这是一个示例文件",
+            "entry": "Sample",
+            "option": [
+                "OptionB"
+            ]
+        },
+        {
+            "name": "这是一段十二个汉字的文本",
+            "entry": "Sample"
+        }
+    ],
+    "resource": [
+        {
+            "name": "Sample Res 1",
+            "path": [
+                "{PROJECT_DIR}/resource"
+            ]
+        },
+        {
+            "name": "Sample Res 2",
+            "path": [
+                "{PROJECT_DIR}/resource/Offical",
+                "{PROJECT_DIR}/resource"
+            ]
+        }
+    ],
+    "option": {
+        "OptionA": {
+            "cases": [
+                {
+                    "name": "case 1",
+                    "pipeline_override": {
+                        "sometask": {}
+                    }
+                },
+                {
+                    "name": "case 2",
+                    "pipeline_override": {
+                        "ottthertask": {}
+                    }
+                }
+            ]
+        },
+        "OptionB": {
+            "cases": [
+                {
+                    "name": "case 3",
+                    "pipeline_override": {
+                        "sometask": {}
+                    }
+                },
+                {
+                    "name": "case 4",
+                    "pipeline_override": {
+                        "othertask": {}
+                    }
+                }
+            ]
+        }
+    }
+}
