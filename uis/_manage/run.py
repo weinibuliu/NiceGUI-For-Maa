@@ -128,7 +128,6 @@ class ConfigTable:
         if self.table.selected == []:
             dialog.delete.disable()
             dialog.run.disable()
-            dialog.stop.disable()
         elif (
             len(self.table.selected) == 1
             and self.table.selected[0]["create_time"] != "Undefined"
@@ -138,7 +137,6 @@ class ConfigTable:
         elif len(self.table.selected) > 1:
             dialog.delete.enable()
             dialog.run.disable()
-            dialog.stop.disable()
 
     def update(self):
         apps = self.read()
