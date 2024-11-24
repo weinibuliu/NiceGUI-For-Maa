@@ -8,6 +8,8 @@ from utils.tool.system import language, win32able
 class Read:
     def __init__(self) -> None:
         configs_path: Path = Path(Path.cwd(), "config")
+        if not configs_path.exists():
+            configs_path.mkdir()
         self.ui_cofig_path = Path(configs_path, "ui_config.json")
         self.adbs_path = Path(configs_path, "adbs.json")
         self.win32s_path = Path(configs_path, "win32s.json")
@@ -63,6 +65,8 @@ class Read:
 class Wirte:
     def __init__(self) -> None:
         configs_path: Path = Path(Path.cwd(), "config")
+        if not configs_path.exists():
+            configs_path.mkdir()
         self.ui_cofig_path = Path(configs_path, "ui_config.json")
         self.adbs_path = Path(configs_path, "adbs.json")
         self.win32s_path = Path(configs_path, "win32s.json")

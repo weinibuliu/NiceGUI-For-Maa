@@ -128,7 +128,7 @@ class RunButton:
         self.language = language
         self.i18n = language_type(language).Manage
         self.button = (
-            ui.button(self.i18n.Button.run, icon="start")
+            ui.button(self.i18n.Button.run, icon="play_arrow")
             .props("no-caps")
             .props("align='left'")
             .classes("justify-start")
