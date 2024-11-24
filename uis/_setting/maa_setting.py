@@ -31,6 +31,9 @@ class GPUSelect:
             self.gpu_select.set_options(gpus)
             self.gpu_select.set_value(gpu)
             self.gpu_select.enable()
+        else:
+            self.gpu_select.set_options({-2: "Disable(Set CPU)"})
+            self.gpu_select.set_value(-2)
 
     def enable(self):
         self.gpu_select.enable()
