@@ -7,6 +7,7 @@ from utils import maafw
 from utils.tool.files import Wirte, FindDirs
 from uis.i18n import language_type
 from utils.tool.singleton import singleton
+from . import run
 
 
 @singleton
@@ -37,6 +38,7 @@ class NewDialog:
     def __init__(self, language: str) -> None:
         from .device import AdbTable, Win32Table  # To avoid import error
 
+        self.language = language
         self.i18n = i18n = language_type(language).Manage.Config
         with ui.dialog() as self.dialog, ui.card().style(
             "width: 500px; height: 550px; max-width: none"
@@ -196,6 +198,7 @@ class NewDialog:
         task = read.get_task()
         self.task_select.set_options(task)
         self.task_select.set_value("")
+        self.clear_task()  # Clear Task
         self.tabs.value = self.task  # Jump to the task tab
         self.task.enable()
 
@@ -298,13 +301,17 @@ class NewDialog:
         with ui.dialog().props("persistent") as name_dialog, ui.card():
             with ui.column().props("align='center'"):
                 config_name = ui.input(
-                    "Config Name", placeholder="Undefined", value="Undefined"
+                    self.i18n.Dialog.config_name,
+                    placeholder="Undefined",
+                    value="Undefined",
                 ).classes("w-full")
                 with ui.row():
-                    cancel_button = ui.button("Cancel", icon="cancel").props("no-caps")
-                    continue_button = ui.button("Continue", icon="chevron_right").props(
-                        "no-caps"
-                    )
+                    cancel_button = ui.button(
+                        self.i18n.Dialog.cancel, icon="cancel"
+                    ).props("no-caps")
+                    continue_button = ui.button(
+                        self.i18n.Dialog._continue, icon="chevron_right"
+                    ).props("no-caps")
 
         name_dialog.open()
 
@@ -337,11 +344,12 @@ class NewDialog:
                     "task": task_list,
                 }
             }
-            Wirte().json("app", data=data)
+            Wirte().json("add_app", data=data)
             ui.notify(
                 self.i18n.Dialog.Notify.saved, position="bottom-right", type="positive"
             )
             self.dialog.close()
+            run.ConfigTable(self.language).update()  # Upsate the config table
             self.clear_task()  # Clear the task tab.
 
         cancel_button.on_click(cancel_on_click)

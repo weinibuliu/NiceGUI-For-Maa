@@ -27,7 +27,7 @@ class Select:
             position="bottom-right",
             type="info",
         )
-        if language != "en_US":
+        if i18n.notify != i18n.notify_en:
             ui.notify(
                 message=i18n.notify_en,
                 position="bottom-right",

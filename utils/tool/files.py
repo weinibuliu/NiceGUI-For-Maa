@@ -74,7 +74,7 @@ class Wirte:
 
     def json(
         self,
-        target: Literal["ui_config", "add_device", "del_device", "app"],
+        target: Literal["ui_config", "add_device", "del_device", "add_app", "del_app"],
         kind: Literal["adb", "win32"] = "",
         data: dict = {},
         del_key: list[str] = [],
@@ -88,7 +88,7 @@ class Wirte:
                 path = self.win32s_path
             else:
                 return 101
-        elif target == "app":
+        elif target == "add_app" or target == "del_app":
             path = self.apps_path
         else:
             return 100

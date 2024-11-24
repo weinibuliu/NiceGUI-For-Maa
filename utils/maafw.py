@@ -245,5 +245,4 @@ class ReadInterface:
                 o_d.update({f"{o_k}@@@{override}@@@{i}": name})
                 i += 1
             option_dict.update(o_d)
-            print("option", option_dict)
         return option_dict

@@ -120,6 +120,10 @@ class Manage:
             save = "Save"
             update = "Refresh"
 
+            config_name = "Config Name"
+            _continue = "Continue"
+            cancel = "Cancel"
+
             class Notify:
                 updated = "Refresh successfully."
                 error = "Error"
@@ -145,6 +149,11 @@ class Manage:
             unconneted = "Connect unsuccessfully."
 
     class Run:
+        appname = "App Name"
+        configname = "Config Name"
+        create_time = "Create Time"
+        undefined = "Undefined"
+
         class Button:
             run = "Run"
             update = "Refresh"
@@ -152,13 +161,11 @@ class Manage:
             start = "Start"
             stop = "Stop"
 
-        class AdbTable:
-            appname = "App Name"
-            configname = "Config Name"
-            create_time = "Create Time"
-            undefined = "Undefined"
-
         class Notify:
+            deleted = "Delete successfully."
+            undeleted = "Delete unsuccessfully."
+            updated = "Refresh successfully."
+            unupdated = "Refresh unsuccessfully."
             error = "Error"
             toolkited = "Toolkit initialized."
             untoolkited = "Toolkit uninitialized"
@@ -217,7 +224,7 @@ class Setting:
     class Startup:
         startup = "Startup"
         show = "Automatically open the page in browser"
-        guide = "Enable the boot page (Restart to take effect)）"
+        guide = "Enable the boot page (Restart to take effect)"
 
     class Reload:
         reload = "Restart UI"

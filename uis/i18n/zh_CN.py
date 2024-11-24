@@ -118,6 +118,10 @@ class Manage:
             save = "保存"
             update = "刷新"
 
+            config_name = "配置名称"
+            _continue = "继续"
+            cancel = "取消"
+
             class Notify:
                 updated = "刷新成功。"
                 error = "内部错误。"
@@ -143,6 +147,11 @@ class Manage:
             unconneted = "连接失败。"
 
     class Run:
+        appname = "应用名称"
+        configname = "配置名称"
+        create_time = "创建时间"
+        undefined = "未定义"
+
         class Button:
             run = "运行"
             update = "刷新"
@@ -150,13 +159,11 @@ class Manage:
             start = "开始"
             stop = "停止"
 
-        class AdbTable:
-            appname = "应用名称"
-            configname = "配置名称"
-            create_time = "创建时间"
-            undefined = "未定义"
-
         class Notify:
+            deleted = "配置删除成功。"
+            undeleted = "配置删除失败。"
+            updated = "刷新成功。"
+            unupdated = "刷新失败。"
             error = "内部错误。"
             toolkited = "Toolkit 初始化成功。"
             untoolkited = "Toolkit 初始化失败。"

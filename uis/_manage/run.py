@@ -4,8 +4,7 @@ import asyncio
 from nicegui import ui
 
 from utils import maafw
-from utils.custom import Sample
-from utils.tool.files import Read
+from utils.tool.files import Read, Wirte
 from .._setting.run_notify import CheckBoxes
 from utils.tool.singleton import singleton
 from uis.i18n import language_type
@@ -46,9 +45,14 @@ class NewDialog:
                     .props("no-caps")
                     .classes("w-25")
                 )
-                RunButton(language)
-                StopButton(language).disable()
-            ConfigTable(language)
+                self.run = RunButton(language)
+                self.stop = StopButton(language)
+                self.run.disable()
+                self.stop.disable()
+            config = ConfigTable(language)
+            self.delete.disable()
+            self.update.on_click(config.update_on_click)
+            self.delete.on_click(config.delete_on_click)
 
     def open(self):
         self.dialog.open()
@@ -61,7 +65,7 @@ class NewDialog:
 class ConfigTable:
     def __init__(self, language: str) -> None:
         self.language = language
-        self.i18n = i18n = language_type(language).Manage.Run.AdbTable
+        self.i18n = i18n = language_type(language).Manage.Run
         columns = []
         for c_list in [
             ["config_name", i18n.configname],
@@ -83,10 +87,11 @@ class ConfigTable:
         self.table = ui.table(
             columns=columns,
             rows=apps,
-            selection="single",
+            selection="multiple",
             row_key="create_time",
             pagination=5,
         ).classes("w-full")
+        self.table.on_select(self.table_on_select)
 
     def read(self):
         data: dict[dict] | int | None = Read().devices("apps")
@@ -97,7 +102,7 @@ class ConfigTable:
                 {
                     "config_name": "Undefined",
                     "app_name": "Undefined",
-                    "id": "Undefined",
+                    "create_time": "Undefined",
                 }
             ]
             return apps
@@ -115,11 +120,47 @@ class ConfigTable:
             apps.append(app_dict)
         return apps
 
+    def table_on_select(self):
+        self.change_buttons_statu()
 
-@singleton
-class StopButton:
-    def __init__(self) -> None:
-        self.button = ui.button()
+    def change_buttons_statu(self):
+        dialog = NewDialog(self.language)
+        if self.table.selected == []:
+            dialog.delete.disable()
+            dialog.run.disable()
+            dialog.stop.disable()
+        elif (
+            len(self.table.selected) == 1
+            and self.table.selected[0]["create_time"] != "Undefined"
+        ):
+            dialog.delete.enable()
+            dialog.run.enable()
+        elif len(self.table.selected) > 1:
+            dialog.delete.enable()
+            dialog.run.disable()
+            dialog.stop.disable()
+
+    def update(self):
+        apps = self.read()
+        self.table.rows = apps
+        self.table.selected = []
+        self.table.update()
+
+    def update_on_click(self):
+        self.update()
+        ui.notify(self.i18n.Notify.updated, position="bottom-right", type="positive")
+
+    def delete_on_click(self):
+        apps: list[dict] = self.table.selected
+        del_key = []
+        for app in apps:
+            create_time = app["create_time"]
+            if create_time == "Undefined":
+                return
+            del_key.append(create_time)
+        Wirte().json("del_app", "", del_key=del_key)
+        ui.notify(self.i18n.Notify.deleted, position="bottom-right", type="info")
+        self.update()
 
 
 @singleton
@@ -133,7 +174,7 @@ class RunButton:
             .props("align='left'")
             .classes("justify-start")
         )
-        self.button.on_click(MaaCore(language).run)
+        self.button.on_click(MaaCore(self.language).run)
 
     def enable(self):
         self.button.enable()
@@ -171,17 +212,15 @@ class MaaCore:
         self.language = language
         self.i18n = language_type(language).Manage.Run.Notify
 
-    async def run(self):
+    async def run(self) -> bool | None:
         from .device import AdbTable, Win32Table
 
-        StopButton(self.language).enable()
         i18n = self.i18n
         device_select: dict = (
             AdbTable(self.language).table.selected
             + Win32Table(self.language).table.selected
         )[0]
         app: dict = ConfigTable(self.language).table.selected[0]
-        app_name = app["app_name"]
 
         device_id = device_select["id"]
         adbs, win32s = Read().devices("adbs"), Read().devices("win32s")
@@ -209,6 +248,7 @@ class MaaCore:
                 position="bottom-right",
                 type="negative",
             )
+            return
         if CheckBoxes(self.language).toolkit_stat.value:
             ui.notify(i18n.toolkited, position="bottom-left", type="positive")
 
@@ -284,14 +324,14 @@ class MaaCore:
             await asyncio.sleep(3)
             self.notification.dismiss()
             return
-        elif statu is None:
-            RunButton(self.language).enable()
-            StopButton(self.language).disable()
-            self.notification.message = i18n.done
-            self.notification.type = "positive"
-            self.notification.spinner = False
+        RunButton(self.language).enable()
+        StopButton(self.language).disable()
+        self.notification.message = i18n.done
+        self.notification.type = "positive"
+        self.notification.spinner = False
         await asyncio.sleep(3)
         self.notification.dismiss()
+        return True
 
     async def stop(self):
         i18n = self.i18n
@@ -308,9 +348,9 @@ class MaaCore:
         else:
             RunButton(self.language).enable()
             StopButton(self.language).disable()
+            ConfigTable(self.language).table.set_visibility(True)
             notification.message = i18n.stopped
             notification.type = "warning"
             notification.spinner = False
         await asyncio.sleep(3)
         notification.dismiss()
-        StopButton(self.language).disable()
