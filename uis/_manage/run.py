@@ -4,10 +4,11 @@ import asyncio
 from nicegui import ui
 
 from utils import maafw
-from utils.tool.files import Read, Wirte
-from .._setting.run_notify import CheckBoxes
+from utils.tool.files import Read, Write
 from utils.tool.singleton import singleton
 from uis.i18n import language_type
+from .._setting.run_notify import CheckBoxes
+from uis._setting.maa_setting import GPUSelect
 
 
 @singleton
@@ -156,7 +157,7 @@ class ConfigTable:
             if create_time == "Undefined":
                 return
             del_key.append(create_time)
-        Wirte().json("del_app", "", del_key=del_key)
+        Write().json("del_app", "", del_key=del_key)
         ui.notify(self.i18n.Notify.deleted, position="bottom-right", type="info")
         self.update()
 
@@ -274,7 +275,12 @@ class MaaCore:
 
         # Load resource
         res = None
-        res = await maafw.load_resource(app["resource"], app["app_path"])
+        res = await maafw.load_resource(
+            app["resource"],
+            app["app_path"],
+            app["app_name"],
+            GPUSelect(self.language).gpu_select.value,
+        )
         if type(res) == int or type(res) == str:
             ui.notify(
                 f"{i18n.unresed} ({res})", position="bottom-right", type="negative"

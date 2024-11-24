@@ -10,6 +10,7 @@ from maa.resource import Resource
 from maa.toolkit import Toolkit, AdbDevice, DesktopWindow
 from maa.controller import AdbController, Win32Controller
 from maa.define import MaaAdbScreencapMethodEnum, MaaAdbInputMethodEnum
+
 from utils import custom  # Custom support
 
 

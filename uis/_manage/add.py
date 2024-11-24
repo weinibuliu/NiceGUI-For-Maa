@@ -10,7 +10,7 @@ from utils.tool.system import win32able
 from uis.i18n import language_type
 from utils.tool.singleton import singleton
 from utils.maafw import Find
-from utils.tool.files import Wirte
+from utils.tool.files import Write
 from utils.infos.methods import Methods
 
 
@@ -131,7 +131,7 @@ class Adb:
             name: str = adb_select.options[adb_v]
             adb_infos: list[str] = adb_v.split(";")
             _path, _address, _extras = (adb_infos[0], adb_infos[1], eval(adb_infos[2]))
-            w_statu = Wirte().json(
+            w_statu = Write().json(
                 target="add_device",
                 kind="adb",
                 data={
@@ -265,7 +265,7 @@ class Adb:
             else:
                 _name = name.value
             _extras = eval(extras.value)
-            w_statu = Wirte().json(
+            w_statu = Write().json(
                 target="add_device",
                 kind="adb",
                 data={
@@ -384,7 +384,7 @@ class Win32:
             i18n = self.i18n
             rercord_time = str(time.time())
             _hwnd, name = hwnd.value.split(";")[0], hwnd.value.split(";")[1]
-            w_statu = Wirte().json(
+            w_statu = Write().json(
                 target="add_device",
                 kind="win32",
                 data={

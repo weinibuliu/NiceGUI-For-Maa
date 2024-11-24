@@ -3,7 +3,7 @@ import asyncio
 from nicegui import ui
 
 from .reload import reload
-from utils.tool.files import Read, Wirte
+from utils.tool.files import Read, Write
 from uis.i18n import language_type
 
 
@@ -20,7 +20,7 @@ class Select:
         self.dark_select.disable()
         dark = self.dark_select.value
         i18n = self.i18n
-        Wirte().json(target="ui_config", data={"dark": dark})
+        Write().json(target="ui_config", data={"dark": dark})
         ui.notify(
             message=i18n.notify,
             position="bottom-right",

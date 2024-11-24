@@ -4,7 +4,7 @@ from nicegui import ui
 
 from .reload import reload
 from uis.i18n import language_type, language_dict
-from utils.tool.files import Read, Wirte
+from utils.tool.files import Read, Write
 
 
 class Select:
@@ -21,7 +21,7 @@ class Select:
         self.language_select.disable()
         language = self.language_select.value
         i18n = self.i18n
-        Wirte().json(target="ui_config", data={"language": language})
+        Write().json(target="ui_config", data={"language": language})
         ui.notify(
             message=i18n.notify,
             position="bottom-right",

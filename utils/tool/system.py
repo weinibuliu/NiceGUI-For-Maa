@@ -10,7 +10,7 @@ language = "zh_CN"
 if _language in ["zh_CN", "zh_TW", "en_US"]:
     language = _language
 
-system_type: Literal["Linux", "Windows", "Darwin", "Java"]
+system_type: Literal["Linux", "Windows", "Darwin"]
 system_type = platform.system()
 system_name = platform.platform()
 system_version = platform.version()

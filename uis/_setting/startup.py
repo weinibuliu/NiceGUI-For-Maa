@@ -1,6 +1,6 @@
 from nicegui import ui
 
-from utils.tool.files import Read, Wirte
+from utils.tool.files import Read, Write
 from uis.i18n import language_type
 
 show = Read().ui_config()["show"]
@@ -15,5 +15,5 @@ class CheckBoxes:
             self.guide = ui.checkbox(i18n.guide, value=False)
             self.guide.disable()  # Disable becuase it is not completed.
             self.show.on_value_change(
-                lambda: Wirte().json("ui_config", data={"show": self.show.value})
+                lambda: Write().json("ui_config", data={"show": self.show.value})
             )

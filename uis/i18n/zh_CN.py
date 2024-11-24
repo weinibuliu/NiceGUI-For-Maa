@@ -195,7 +195,7 @@ class Manage:
             name = "窗口名称"
             hwnd = "窗口句柄"
             task = "任务"
-            updated = "Win32 列表更新成功"
+            updated = "Win32 列表更新成功。"
             uninited = "Win32 列表初始化失败。"
             unupdated = "Win32 列表更新失败。"
 
@@ -212,7 +212,14 @@ class Setting:
         dark_dict = {None: "跟随系统", False: "亮色主题", True: "深色主题"}
         notify = "UI 即将重启以完成更改。"
 
-    class Notify:
+    class Maa:
+        maa = "MaaFramework 设置"
+        version = "MaaFw 版本: "
+        gpu_select = "GPU 加速"
+        gpu_disable = "禁用（使用 CPU）"
+        gpu_auto = "自动选择"
+
+    class RunNotify:
         notify = "运行时通知设置"
         toolkit = "Toolkit 初始化"
         resource = "资源加载"

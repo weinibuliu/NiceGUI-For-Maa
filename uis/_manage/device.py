@@ -2,7 +2,7 @@ from nicegui import ui
 
 from utils.tool.singleton import singleton
 from uis.i18n import language_type
-from utils.tool.files import Read, Wirte
+from utils.tool.files import Read, Write
 from . import delete, run, update
 
 ui_config = Read().ui_config()
@@ -67,7 +67,7 @@ class AdbTable:
         self.table.on_select(self.change_buttons_statu)
 
     def update(self) -> None | int:
-        Wirte().json("ui_config", data={"show_adb": self.checkbox.value})
+        Write().json("ui_config", data={"show_adb": self.checkbox.value})
         adbs = self.read()
         if type(adbs) == int:
             return 201
@@ -204,7 +204,7 @@ class Win32Table:
         self.table.on_select(self.change_buttons_statu)
 
     def update(self) -> None | int:
-        Wirte().json("ui_config", data={"show_win32": self.checkbox.value})
+        Write().json("ui_config", data={"show_win32": self.checkbox.value})
         win32s = self.read()
         if type(win32s) == int:
             return 201

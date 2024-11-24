@@ -21,7 +21,7 @@ class Read:
                         "dark": None,
                         "language": language,
                         "show": True,
-                        "default_gpu": -1,
+                        "gpu": -2,
                         "run_toolkit": False,
                         "run_res": False,
                         "run_ctrl": True,
@@ -62,7 +62,7 @@ class Read:
         return data
 
 
-class Wirte:
+class Write:
     def __init__(self) -> None:
         configs_path: Path = Path(Path.cwd(), "config")
         if not configs_path.exists():

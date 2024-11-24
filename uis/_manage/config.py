@@ -4,7 +4,7 @@ import time
 from nicegui import ui
 
 from utils import maafw
-from utils.tool.files import Wirte, FindDirs
+from utils.tool.files import Write, FindDirs
 from uis.i18n import language_type
 from utils.tool.singleton import singleton
 from . import run
@@ -344,7 +344,7 @@ class NewDialog:
                     "task": task_list,
                 }
             }
-            Wirte().json("add_app", data=data)
+            Write().json("add_app", data=data)
             ui.notify(
                 self.i18n.Dialog.Notify.saved, position="bottom-right", type="positive"
             )

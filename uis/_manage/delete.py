@@ -1,7 +1,7 @@
 from nicegui import ui
 
 from . import device
-from utils.tool.files import Wirte
+from utils.tool.files import Write
 from uis.i18n import language_type
 from utils.tool.singleton import singleton
 
@@ -63,7 +63,7 @@ class NewDialog:
         for del_key, kind in zip((adb_del_key, win32_del_key), ("adb", "win32")):
             if del_key == []:
                 continue
-            w_statu = Wirte().json("del_device", kind, del_key=del_key)
+            w_statu = Write().json("del_device", kind, del_key=del_key)
             if w_statu is not None:
                 ui.notify(
                     f"{i18n.faild} ({w_statu})",
