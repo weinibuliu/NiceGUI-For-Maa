@@ -21,6 +21,7 @@
 
 ## 许可证
 **NFM** 使用 **[LGPL-3.0](LICENSE.md)** 许可证进行开源。
+
 ## 鸣谢
 ### 开源项目
 - **[MaaFramework](https://github.com/MaaXYZ/MaaFramework)**\
