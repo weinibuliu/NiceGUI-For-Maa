@@ -79,6 +79,7 @@ class Manage:
             search = "Search"
             save = "Save"
             advance = "Advance"
+            warning = "Changing the options below may cause some exceptions!"
 
             class Notify:
                 saved = "Save successfully."

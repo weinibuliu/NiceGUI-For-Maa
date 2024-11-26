@@ -326,11 +326,9 @@ class Win32:
                 )
         with ui.column():
             advance_mode = ui.checkbox(self.i18n.advance)
-            ui.label(
-                "Changeing the following options may cause some exceptions!"
-            ).classes(replace="text-warning").bind_visibility_from(
-                advance_mode, "value"
-            )
+            ui.label(self.i18n.warning).classes(
+                replace="text-warning"
+            ).bind_visibility_from(advance_mode, "value")
             screencap_methods = (
                 ui.select(Methods.Win32.screen, label="Screencap Methods", value=-1)
                 .bind_visibility_from(advance_mode, "value")

@@ -76,7 +76,8 @@ class Manage:
         class Win32:
             search = "搜索"
             save = "保存"
-            advance = "高级设置"
+            advance = "高级选项"
+            warning = "改变下面的选项可能会引发某些异常！"
 
             class Notify:
                 saved = "保存成功"

@@ -369,7 +369,7 @@ class NewDialog:
             self.delete.enable()
         else:
             self.delete.disable()
-        if type(rows) == list and len(rows) != []:
+        if type(rows) == list and len(rows) > 0:
             self.save.enable()
             self.update.enable()
         else:
