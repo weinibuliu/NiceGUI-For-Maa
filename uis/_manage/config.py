@@ -203,7 +203,7 @@ class NewDialog:
         self.task.enable()
 
     def task_change(self):
-        # value = f"{random int}@@@{entry}@@@{option_name}@@@{option_value}"
+        # value = f"{random int}@$?{entry}@$?{option_name}@$?{option_value}"
         self.add.enable()
         for s in self.s_list:
             s.set_visibility(False)
@@ -211,7 +211,7 @@ class NewDialog:
             s.set_value("{}")
         value: str = self.task_select.value
         if value is not None and value != "":
-            value_list = value.split("@@@")
+            value_list = value.split("@$?")
             option = value_list[3]
             option_str: list[str] = ast.literal_eval(option)
             if option is None or option == []:
@@ -248,7 +248,7 @@ class NewDialog:
         for s, opton_name in zip(self.s_list[0:option_num], option_str):
             option_dict = {}
             for key in option_keys:
-                if f"{opton_name}@@@" in key:
+                if f"{opton_name}@$?" in key:
                     option_dict.update({key: option[key]})
             if option_dict == {}:
                 ui.notify(
@@ -268,7 +268,7 @@ class NewDialog:
         for s in self.s_list:
             if s.value is not None:
                 task_name += s.options[s.value] + " "
-                task_option.update(eval(s.value.split("@@@")[1]))
+                task_option.update(eval(s.value.split("@$?")[1]))
         row = task_table_rows({task_name: task_option})
         self.task_table.add_row(row)
         self.task_table.update()
@@ -447,7 +447,7 @@ def task_table_columns(language: str) -> list[dict]:
 def task_table_rows(task: dict) -> dict:
     # Replace some str
     key = list(task.keys())[0]
-    raw_str: list[str] = key.split("@@@")
+    raw_str: list[str] = key.split("@$?")
 
     task_name = raw_str[1]
     task_entry = raw_str[2]

@@ -15,9 +15,11 @@ def get_gpu(language: str, system: str = system_type) -> dict[int, str] | None:
         gpu_names = subprocess.check_output(
             "wmic path win32_videocontroller get name", shell=True, text=True
         )
-        gpu_ids = gpu_ids.strip().split("\n")[2:]
-        gpu_names: str = gpu_names.strip().split("\n")[2:]
+        gpu_ids = gpu_ids.strip().split("\n")[1:]
+        gpu_names: str = gpu_names.strip().split("\n")[1:]
         for id, name in zip(gpu_ids, gpu_names):
+            if id == "" or name == "":
+                continue
             id = int(id.split("r")[-1])  # id will like VideoController1
             id -= 1
             gpus.update({id: name})

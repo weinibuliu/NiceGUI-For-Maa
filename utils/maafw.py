@@ -226,7 +226,7 @@ class ReadInterface:
                 option = None
             else:
                 option: list[str] = task["option"]
-            task_dict.update({f"{i}@@@{name}@@@{entry}@@@{option}@@@ ": name})
+            task_dict.update({f"{i}@$?{name}@$?{entry}@$?{option}@$? ": name})
             i += 1
         return task_dict
 
@@ -243,7 +243,7 @@ class ReadInterface:
             for o in option:
                 name: str = o["name"]
                 override: dict = o["pipeline_override"]
-                o_d.update({f"{o_k}@@@{override}@@@{i}": name})
+                o_d.update({f"{o_k}@$?{override}@$?{i}": name})
                 i += 1
             option_dict.update(o_d)
         return option_dict
